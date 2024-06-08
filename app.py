@@ -74,6 +74,8 @@ def main():
         st.session_state.conversation = None
     if "chat_history" not in st.session_state:
         st.session_state.chat_history = None
+    if "pdf_docs" not in st.session_state:
+        st.session_state.pdf_docs = None
 
     st.header("Chat with multiple PDFs :books:")
     user_question = st.text_input("Ask a question about your documents:")
@@ -86,6 +88,8 @@ def main():
             "Upload your PDFs here and click on 'Process'", accept_multiple_files=True)
         if st.button("Process"):
             with st.spinner("Processing"):
+                st.session_state.pdf_docs = pdf_docs  # Almacena los archivos subidos en st.session_state
+
                 # get pdf text
                 raw_text = get_pdf_text(pdf_docs)
 
